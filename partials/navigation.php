@@ -16,9 +16,7 @@
       <a href="#responsive-header" class="block mt-4 lg:inline-block lg:mt-0 text-teal-lighter hover:text-white mr-4">
         <span class="text-black hover:text-F2CA99 ig-font">Orders</span>
       </a>
-      <a href="#responsive-header" class="block mt-4 lg:inline-block lg:mt-0 text-teal-lighter hover:text-white mr-4">
-        <span class="text-black hover:text-F2CA99 ig-font">Shifts</span>
-      </a>
+      <a href="<?php BASE_PATH ?>shifts"> Shifts</a>
     </div>
     <div> </div>
     <div>

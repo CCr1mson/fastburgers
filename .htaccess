@@ -15,10 +15,13 @@ RewriteEngine On
 #  rule matches, effectively preventing any further rewrites from being applied. 
 #  This can be useful in situations where you have multiple RewriteRules that could 
 #  potentially match a URL, but you only want one of them to be applied.
-
+RewriteBase /fastburgers/
 # General rewrite
 RewriteRule ^/$ index.php [L]
 RewriteRule ^login$ pages/login.php [L]
+RewriteRule ^orders$ pages/orders.php [L]
+RewriteRule ^shifts$ pages/shifts.php [L]
+RewriteRule ^more_info$ pages/more_info.php [L]
 
 
 
