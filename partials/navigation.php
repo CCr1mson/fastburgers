@@ -5,6 +5,7 @@
     }
 </style>
 
+
 <nav class="flex items-center justify-between flex-wrap bg-orange-600 p-6">
   <div class="block lg:hidden">
     <button class="flex items-center px-3 py-2 border rounded text-teal-lighter border-teal-light hover:text-white hover:border-white">
@@ -13,12 +14,11 @@
   </div>
   <div class="w-full block flex-grow lg:flex lg:items-center lg:w-auto">
     <div class="text-sm lg:flex-grow">
-      <a href="#responsive-header" class="block mt-4 lg:inline-block lg:mt-0 text-teal-lighter hover:text-white mr-4">
-        <span class="text-black hover:text-F2CA99 ig-font">Orders</span>
-      </a>
-      <a href="<?php BASE_PATH ?>shifts"> Shifts</a>
+    <a href="<?php= BASE_PATH ?>orders"> Orders</a>
+    <a href="<?php= BASE_PATH ?>shifts"> Shifts</a>
     </div>
-    <div> </div>
+    <div> 
+    </div>
     <div>
     </div>
   </div>

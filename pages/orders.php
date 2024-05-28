@@ -4,6 +4,7 @@ include "../partials/header.php";
 include "../partials/navigation.php";
 
 
+
 $orders = $conn->prepare("SELECT
 o.order_id,
 o.order_date,
@@ -18,40 +19,50 @@ ORDER BY o.order_date DESC
 ");
 
 $orders->execute();
+
 $orders->store_result();
+
 $orders->bind_result($oid, $date, $fk_payment_type, $customer, $payment_type);
 ?>
 
+<!-- table component taken from tailwind components-->
+<div class="overflow-hidden rounded-lg border border-gray-200 shadow-md m-5">
+  <table class="w-full border-collapse bg-white text-left text-sm text-gray-500">
+    <thead class="bg-gray-50">
+      <tr>
+        <th scope="col" class="px-6 py-4 font-medium text-gray-900">Order Id</th>
+        <th scope="col" class="px-6 py-4 font-medium text-gray-900">Name</th>
+        <th scope="col" class="px-6 py-4 font-medium text-gray-900">Order Date</th>
+        <th scope="col" class="px-6 py-4 font-medium text-gray-900">Menu</th>
+        <th scope="col" class="px-6 py-4 font-medium text-gray-900">Cash / Card</th>
+        <th scope="col" class="px-6 py-4 font-medium text-gray-900">View order details</th>
+      </tr>
+    </thead>
+    <tbody class="divide-y divide-gray-100 border-t border-gray-100">
 
-    
+    <?php while($orders->fetch()) : ?>
+      <tr class="hover:bg-gray-50">
+        <td class="px-6 py-4"><?= $oid ?></td>
+        <td class="px-6 py-4"> <?= $customer ?></td>
+        <td class="px-6 py-4"><span class="inline-flex items-center gap-1 rounded-full bg-green-50 px-2 py-1 text-xs font-semibold text-green-600">
+            <?= $date ?>
+          </span>
+        </td>
+        <td class="px-6 py-4">Lunch</td>
+        <td class="px-6 py-4">
+          <div class="flex gap-2"><span class="inline-flex items-center gap-1 text-white rounded-full <?php if($fk_payment_type == 1) : ?> bg-green-500 <?php elseif($fk_payment_type == 2) : ?>bg-yellow-800 <?php else : ?> bg-red-400 <?php endif ?> px-2 py-1 text-xs font-semibold text-blue-600">
+              <?= $payment_type ?>
+            </span>
+          </div>
+        </td>
 
-    <table class="border-collapse w-full">
-    <tbody>
-    <?php while ($orders->fetch()) : ?>
-        <tr class="bg-white lg:hover:bg-gray-100 flex lg:table-row flex-row lg:flex-row flex-wrap lg:flex-no-wrap mb-10 lg:mb-0">
-            <td class="w-full lg:w-auto p-3 text-gray-800 text-center border border-b block lg:table-cell relative lg:static">
-            <th class="p-3 font-bold uppercase bg-gray-200 text-gray-600 border border-gray-300 hidden lg:table-cell"><?= $oid ?></th>
-            <th class="p-3 font-bold uppercase bg-gray-200 text-gray-600 border border-gray-300 hidden lg:table-cell"><?= $customer ?></th>
-            </td>
-            <td class="w-full lg:w-auto p-3 text-gray-800 text-center border border-b text-center block lg:table-cell relative lg:static">
-                <span class="lg:hidden absolute top-0 left-0 bg-blue-200 px-2 py-1 text-xs font-bold uppercase"></span>
-                <? $date ?>
-            </td>
-            <td class="w-full lg:w-auto p-3 text-gray-800 text-center border border-b text-center block lg:table-cell relative lg:static">
-            </td>
-        </tr>
-        <?php endwhile?>
+        <td onclick="window.location.href='more_info/<?= $oid ?>'"><i class="fa-solid fa-eye"></i></td>
+
+      </tr>
+      <?php endwhile ?>
     </tbody>
-</table>
-
-
-
-
-
-
-
-<p>orders</p>
-
+  </table>
+</div>
 <?php 
 
 include '../partials/footer.php';
