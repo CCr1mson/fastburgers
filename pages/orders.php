@@ -5,7 +5,6 @@ include "../partials/navigation.php";
 
 
 $orders = $conn->prepare("SELECT
-
 o.order_id,
 o.order_date,
 o.fk_payment_id,
@@ -21,8 +20,6 @@ ORDER BY o.order_date DESC
 $orders->execute();
 $orders->store_result();
 $orders->bind_result($oid, $date, $fk_payment_type, $customer, $payment_type);
-
-
 ?>
 
 
@@ -45,7 +42,6 @@ $orders->bind_result($oid, $date, $fk_payment_type, $customer, $payment_type);
         </tr>
         <?php endwhile?>
     </tbody>
-    
 </table>
 
 
