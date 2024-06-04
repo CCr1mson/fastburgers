@@ -3,6 +3,8 @@ $hn = 'localhost';
 $un = 'fastburgeradmin';
 $pw = 'CwLPk/Ys))HH7wAC';
 $db = 'fastburgersapp';
+$un = 'root';
+$pw = '';
 
 $conn = mysqli_connect($hn, $un, $pw, $db);
 if (!$conn)

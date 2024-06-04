@@ -16,12 +16,21 @@ RewriteEngine On
 #  This can be useful in situations where you have multiple RewriteRules that could 
 #  potentially match a URL, but you only want one of them to be applied.
 # General rewrite
-RewriteRule ^Login$ pages/login.php [L]
-RewriteRule ^Orders$ pages/orders.php [L]
-RewriteRule ^Shifts$ pages/shifts.php [L]
-RewriteRule ^More_info$ pages/more_info.php [L]
+RewriteRule ^login$ pages/login.php [L]
+RewriteRule ^orders$ pages/orders.php [L]
+RewriteRule ^shifts$ pages/shifts.php [L]
+RewriteRule ^more_info$ pages/more_info.php [L]
 
 
 RewriteRule ^more_info/([0-9]+)$ pages/more_info.php?oid=$1 [L]
 
+# RewriteBase /fastburgers/
+# # General rewrite
+# RewriteRule ^dashboard$ pages/dashboard.php [L]
+# RewriteRule ^orders$ pages/orders.php [L]
+# RewriteRule ^stock$ pages/stock.php [L]
+# RewriteRule ^shifts$ pages/shifts.php [L]
+# RewriteRule ^staff$ pages/staff.php [L]
 
+# # use this format for URLs that will be passing parameters
+# RewriteRule ^orderDetails/([0-9]+)$ pages/orderDetails.php?oid=$1 [L]

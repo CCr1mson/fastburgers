@@ -3,8 +3,14 @@
     .ig-font {
         font-family: 'Irish Grover', cursive;
     }
+    .nav-link {
+        margin-right: 20px; /* Adjust the value as needed for desired spacing */
+        transition: color 0.3s; /* Smooth transition for hover effect */
+    }
+    .nav-link:hover {
+        color: #FFA500; /* Light orange text color on hover */
+    }
 </style>
-
 
 <nav class="flex items-center justify-between flex-wrap bg-orange-600 p-6 h-[10%]">
   <div class="block lg:hidden">
@@ -13,9 +19,9 @@
     </button>
   </div>
   <div class="w-full block flex-grow lg:flex lg:items-center lg:w-auto">
-    <div class="text-sm lg:flex-grow">
-    <a href="<?= BASE_PATH ?>Orders"> Orders</a>
-    <a href="<?= BASE_PATH ?>Shifts"> Shifts</a>
+    <div class="text-sm lg:flex-grow ig-font">
+      <a href="<?= BASE_PATH ?>orders" class="nav-link"> Orders</a>
+      <a href="<?= BASE_PATH ?>shifts" class="nav-link"> Shifts</a>
     </div>
     <div> 
     </div>

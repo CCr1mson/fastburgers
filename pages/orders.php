@@ -3,7 +3,7 @@ include "../config/dbConfig.php";
 include "../partials/header.php";
 include "../partials/navigation.php";
 
-
+///////////////////////////////////////////////////////////////////////////////////////////////
 
 $orders = $conn->prepare("SELECT
 o.order_id,
@@ -23,42 +23,101 @@ $orders->execute();
 $orders->store_result();
 
 $orders->bind_result($oid, $date, $fk_payment_type, $customer, $payment_type);
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+$topstaff = $conn->prepare("SELECT 
+COUNT(o.order_id),
+s.staff_firstname,
+s.staff_surname
+FROM 
+`orders` o
+INNER JOIN 
+staff s ON o.fk_staff_id = s.staff_id
+GROUP BY 
+s.staff_id, s.staff_firstname, s.staff_surname
+ORDER BY o.order_id DESC
+LIMIT 1;");
+
+$topstaff->execute();
+
+$topstaff->store_result();
+
+$topstaff->bind_result($orderstaken ,$stafffirstname, $staffsurname);
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
 ?>
 
 <div class="overflow-hidden rounded-lg border border-gray-200 shadow-md m-5">
   <table class="w-full border-collapse bg-white text-left text-sm text-gray-500">
-    <thead class="bg-gray-50">
+  <h1 class="ig-font">All Orders</h1>
+    <thead class="bg-gray-50 ig-font"> 
       <tr>
-        <th scope="col" class="px-6 py-4 font-medium text-gray-900">Order Id</th>
-        <th scope="col" class="px-6 py-4 font-medium text-gray-900">Name</th>
-        <th scope="col" class="px-6 py-4 font-medium text-gray-900">Order Date</th>
-        <th scope="col" class="px-6 py-4 font-medium text-gray-900">Menu</th>
-        <th scope="col" class="px-6 py-4 font-medium text-gray-900">Cash / Card</th>
-        <th scope="col" class="px-6 py-4 font-medium text-gray-900">View order details</th>
+        <th scope="col" class="px-6 py-4 font-medium text-gray-900 ig-font">Order Id</th>
+        <th scope="col" class="px-6 py-4 font-medium text-gray-900 ig-font">Name</th>
+        <th scope="col" class="px-6 py-4 font-medium text-gray-900 ig-font">Order Date</th>
+        <th scope="col" class="px-6 py-4 font-medium text-gray-900 ig-font">Menu</th>
+        <th scope="col" class="px-6 py-4 font-medium text-gray-900 ig-font">Cash / Card</th>
+        <th scope="col" class="px-6 py-4 font-medium text-gray-900 ig-font">View order details</th>
       </tr>
     </thead>
     <tbody class="divide-y divide-gray-100 border-t border-gray-100">
 
     <?php while($orders->fetch()) : ?>
-      <tr class="hover:bg-gray-50">
-        <td class="px-6 py-4"><?= $oid ?></td>
-        <td class="px-6 py-4"> <?= $customer ?></td>
-        <td class="px-6 py-4"><span class="inline-flex items-center gap-1 rounded-full bg-green-50 px-2 py-1 text-xs font-semibold text-green-600">
-            <?= $date ?>
-          </span>
-        </td>
-        <td class="px-6 py-4">Lunch</td>
-        <td class="px-6 py-4">
-          <div class="flex gap-2"><span class="inline-flex items-center gap-1 text-white rounded-full <?php if($fk_payment_type == 1) : ?> bg-green-500 <?php elseif($fk_payment_type == 2) : ?>bg-yellow-800 <?php else : ?> bg-red-400 <?php endif ?> px-2 py-1 text-xs font-semibold text-blue-600">
-              <?= $payment_type ?>
-            </span>
+      <tr>
+        <td><?= $oid ?></td>
+        <td><?= $customer ?></td>
+        <td><?= $date ?></td>
+        <td>Lunch</td>
+        <td>
+          <div class="flex gap-2">
+            <span><?= $payment_type ?></span>
           </div>
         </td>
 
         <td onclick="window.location.href='more_info/<?= $oid ?>'"><i class="fa-solid fa-eye"></i></td>
 
       </tr>
-      <?php endwhile ?>
+<?php endwhile ?>
+    </tbody>
+  </table>
+</div>
+
+<div class="overflow-hidden rounded-lg border border-gray-200 shadow-md m-5">
+  <table class="w-full border-collapse bg-white text-left text-sm text-gray-500">
+    <h1 class="ig-font">Most popular order</h1>
+    <thead class="bg-gray-50">
+      <tr>
+        <th scope="col" class="px-6 py-4 font-medium text-gray-900 ig-font">Item Name</th>
+        <th scope="col" class="px-6 py-4 font-medium text-gray-900 ig-font">Number of Orders made</th>
+        <th scope="col" class="px-6 py-4 font-medium text-gray-900 ig-font">Total Profit from Item</th>
+      </tr>
+    </thead>
+    <tbody class="divide-y divide-gray-100 border-t border-gray-100">
+    </tbody>
+  </table>
+</div>
+
+<div class="overflow-hidden rounded-lg border border-gray-200 shadow-md m-5">
+  <table class="w-full border-collapse bg-white text-left text-sm text-gray-500">
+    <h1 class="ig-font">Staff Member with Most Orders Taken</h1>
+    <thead class="bg-gray-50">
+      <tr>
+        <th scope="col" class="px-6 py-4 font-medium text-gray-900 ig-font">Staff First Name</th>
+        <th scope="col" class="px-6 py-4 font-medium text-gray-900 ig-font">Staff Surname</th>
+        <th scope="col" class="px-6 py-4 font-medium text-gray-900 ig-font">Orders Taken</th>
+      </tr>
+    </thead>
+    <tbody class="divide-y divide-gray-100 border-t border-gray-100">
+
+    <?php while($topstaff->fetch()) : ?>
+      <tr>
+        <td><?= $stafffirstname ?></td>
+        <td><?= $staffsurname ?></td>
+        <td><?= $orderstaken ?></td>
+      </tr>
+<?php endwhile ?>
     </tbody>
   </table>
 </div>
