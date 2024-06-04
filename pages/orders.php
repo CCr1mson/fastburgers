@@ -25,7 +25,6 @@ $orders->store_result();
 $orders->bind_result($oid, $date, $fk_payment_type, $customer, $payment_type);
 ?>
 
-<!-- table component taken from tailwind components-->
 <div class="overflow-hidden rounded-lg border border-gray-200 shadow-md m-5">
   <table class="w-full border-collapse bg-white text-left text-sm text-gray-500">
     <thead class="bg-gray-50">
@@ -63,6 +62,8 @@ $orders->bind_result($oid, $date, $fk_payment_type, $customer, $payment_type);
     </tbody>
   </table>
 </div>
+
+
 <?php 
 
 include '../partials/footer.php';
