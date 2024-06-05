@@ -27,16 +27,17 @@ $orders->bind_result($oid, $date, $fk_payment_type, $customer, $payment_type);
 ///////////////////////////////////////////////////////////////////////////////////////////////
 
 $topstaff = $conn->prepare("SELECT 
-COUNT(o.order_id),
+COUNT(o.order_id) AS order_count,
 s.staff_firstname,
 s.staff_surname
 FROM 
-`orders` o
+orders o
 INNER JOIN 
 staff s ON o.fk_staff_id = s.staff_id
 GROUP BY 
 s.staff_id, s.staff_firstname, s.staff_surname
-ORDER BY o.order_id DESC
+ORDER BY 
+order_count DESC
 LIMIT 1;");
 
 $topstaff->execute();
@@ -44,6 +45,29 @@ $topstaff->execute();
 $topstaff->store_result();
 
 $topstaff->bind_result($orderstaken ,$stafffirstname, $staffsurname);
+$topstaff->fetch();
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+$mostpopitem = $conn->prepare("SELECT 
+COUNT(oi.fk_order_id) AS order_count,
+i.item_name
+FROM 
+item i
+INNER JOIN 
+order_items oi ON oi.fk_item_id = i.item_id
+GROUP BY 
+i.item_id, i.item_name
+ORDER BY 
+order_count DESC
+LIMIT 1;");
+
+$mostpopitem->execute();
+
+$mostpopitem->store_result();
+
+$mostpopitem->bind_result($numoforders, $itemname);
+$mostpopitem->fetch();
 
 ///////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -91,10 +115,16 @@ $topstaff->bind_result($orderstaken ,$stafffirstname, $staffsurname);
       <tr>
         <th scope="col" class="px-6 py-4 font-medium text-gray-900 ig-font">Item Name</th>
         <th scope="col" class="px-6 py-4 font-medium text-gray-900 ig-font">Number of Orders made</th>
-        <th scope="col" class="px-6 py-4 font-medium text-gray-900 ig-font">Total Profit from Item</th>
       </tr>
     </thead>
     <tbody class="divide-y divide-gray-100 border-t border-gray-100">
+
+    <tr>
+        <td><?= $itemname ?></td>
+        <td><?= $numoforders ?></td>
+      </tr>
+
+
     </tbody>
   </table>
 </div>
@@ -111,13 +141,13 @@ $topstaff->bind_result($orderstaken ,$stafffirstname, $staffsurname);
     </thead>
     <tbody class="divide-y divide-gray-100 border-t border-gray-100">
 
-    <?php while($topstaff->fetch()) : ?>
+  
       <tr>
         <td><?= $stafffirstname ?></td>
         <td><?= $staffsurname ?></td>
         <td><?= $orderstaken ?></td>
       </tr>
-<?php endwhile ?>
+
     </tbody>
   </table>
 </div>
