@@ -73,16 +73,20 @@ $mostpopitem->fetch();
 
 ?>
 
-<div class="overflow-hidden rounded-lg border border-gray-200 shadow-md m-5">
+
+
+
+<div class="overflow-scroll rounded-lg border border-gray-200 shadow-md m-5">
   <table class="w-full border-collapse bg-white text-left text-sm text-gray-500">
   <h1 class="ig-font">All Orders</h1>
+
     <thead class="bg-gray-50 ig-font"> 
       <tr>
-        <th scope="col" class="px-6 py-4 font-medium text-gray-900 ig-font">Order Id</th>
+        <th scope="col" class="px-6 py-4 font-medium text-gray-900 ig-font">Order ID</th>
         <th scope="col" class="px-6 py-4 font-medium text-gray-900 ig-font">Name</th>
         <th scope="col" class="px-6 py-4 font-medium text-gray-900 ig-font">Order Date</th>
         <th scope="col" class="px-6 py-4 font-medium text-gray-900 ig-font">Menu</th>
-        <th scope="col" class="px-6 py-4 font-medium text-gray-900 ig-font">Cash / Card</th>
+        <th scope="col" class="px-6 py-4 font-medium text-gray-900 ig-font">Payment Type</th>
         <th scope="col" class="px-6 py-4 font-medium text-gray-900 ig-font">View order details</th>
       </tr>
     </thead>
@@ -151,6 +155,7 @@ $mostpopitem->fetch();
     </tbody>
   </table>
 </div>
+
 
 
 <?php 

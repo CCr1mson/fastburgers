@@ -1,7 +1,8 @@
 <?php
 
 // define('BASE_PATH', 'http://localhost:8040/fastburgers/');
-define('BASE_PATH', 'http://localhost/fastburgers/fastburgers/');
+//define('BASE_PATH', 'http://localhost/fastburgers/fastburgers/');
+define('BASE_PATH', 'http://localhost/fastburgersapp/fastburgers/');
 
 ?>
 

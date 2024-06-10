@@ -44,7 +44,7 @@ $managerstaff->bind_result($managerfirstname, $managersurname, $managerrole, $ma
     }
 </style>
 
-<div class="overflow-hidden rounded-lg border border-gray-200 shadow-md m-5">
+<div class="overflow-scroll rounded-lg border border-gray-200 shadow-md m-5">
   <table class="w-full border-collapse bg-white text-left text-sm text-gray-500">
     <h1 class="ig-font">Sales Staff Shifts</h1>
     <thead class="bg-gray-50">
@@ -69,29 +69,30 @@ $managerstaff->bind_result($managerfirstname, $managersurname, $managerrole, $ma
 </div>
 
 <div class="overflow-hidden rounded-lg border border-gray-200 shadow-md m-5">
-  <table class="w-full border-collapse bg-white text-left text-sm text-gray-500">
-    <h1 class="ig-font">Manager Staff Shifts</h1>
-    <thead class="bg-gray-50">
-      <tr>
-        <th scope="col" class="px-6 py-4 font-medium text-gray-900 ig-font">Manager First Name</th>
-        <th scope="col" class="px-6 py-4 font-medium text-gray-900 ig-font">Manager Surname</th>
-        <th scope="col" class="px-6 py-4 font-medium text-gray-900 ig-font">Manager Role</th>
-        <th scope="col" class="px-6 py-4 font-medium text-gray-900 ig-font">Manager Shift</th>
-      </tr>
-    </thead>
-    <tbody class="divide-y divide-gray-100 border-t border-gray-100">
-    <?php while($managerstaff->fetch()) : ?>
-    <tr>
-        <td><?= $managerfirstname ?></td>
-        <td><?= $managersurname ?></td>
-        <td><?= $managerrole ?></td>
-        <td><?= $managershift ?></td>
-    </tr>
-    <?php endwhile ?>
-    </tbody>
-  </table>
+  <div class="overflow-x-auto">
+    <table class="w-full border-collapse bg-white text-left text-sm text-gray-500">
+      <h1 class="ig-font">Manager Staff Shifts</h1>
+      <thead class="bg-gray-50">
+        <tr>
+          <th scope="col" class="px-2 py-2 sm:px-4 sm:py-2 font-medium text-gray-900 ig-font">Manager First Name</th>
+          <th scope="col" class="px-2 py-2 sm:px-4 sm:py-2 font-medium text-gray-900 ig-font">Manager Surname</th>
+          <th scope="col" class="px-2 py-2 sm:px-4 sm:py-2 font-medium text-gray-900 ig-font">Manager Role</th>
+          <th scope="col" class="px-2 py-2 sm:px-4 sm:py-2 font-medium text-gray-900 ig-font">Manager Shift</th>
+        </tr>
+      </thead>
+      <tbody class="divide-y divide-gray-100 border-t border-gray-100">
+        <?php while($managerstaff->fetch()) : ?>
+          <tr>
+            <td class="px-2 py-1 sm:px-4 sm:py-2 text-xs sm:text-sm"><?= $managerfirstname ?></td>
+            <td class="px-2 py-1 sm:px-4 sm:py-2 text-xs sm:text-sm"><?= $managersurname ?></td>
+            <td class="px-2 py-1 sm:px-4 sm:py-2 text-xs sm:text-sm"><?= $managerrole ?></td>
+            <td class="px-2 py-1 sm:px-4 sm:py-2 text-xs sm:text-sm"><?= $managershift ?></td>
+          </tr>
+        <?php endwhile ?>
+      </tbody>
+    </table>
+  </div>
 </div>
-
 <?php 
 include '../partials/footer.php';
 ?>
